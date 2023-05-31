@@ -1,7 +1,6 @@
 import './textswitch.css'
-import { FC, HTMLAttributes } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import classnames from 'classnames'
-import React from 'react'
 
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
   label1?: string
@@ -27,10 +26,12 @@ const TextSwitchDefault: FC<TextSwitchProps> = ({ label1, label2, key1, key2, in
   })
 
   let myRef = React.useRef<HTMLInputElement | null>(null)
+
   React.useEffect(() => {
     if (myRef.current) {
       myRef.current.onclick = (e) => {
-        setChecked(e.target.checked)
+        const target = e.target as HTMLInputElement
+        setChecked(target.checked)
       }
     }
 
