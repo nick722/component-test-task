@@ -3,14 +3,14 @@ import React, {ForwardRefRenderFunction, HTMLAttributes} from 'react'
 import classnames from 'classnames'
 
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
-  label1?: string
-  label2?: string,
+  label1: string
+  label2: string,
   key1?: string,
   key2?: string,
   initialState?: boolean
 }
 
-const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
+const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchProps> = ({ label1='Sell', label2='Buy', key1, key2, initialState = false }, ref) => {
   let [checked, setChecked] = React.useState(initialState);
   let sw = classnames({
     switch: true
