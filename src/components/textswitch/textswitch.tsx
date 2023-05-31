@@ -1,5 +1,5 @@
 import './textswitch.css'
-import React, { FC, HTMLAttributes } from 'react'
+import React, {ForwardRefRenderFunction, HTMLAttributes} from 'react'
 import classnames from 'classnames'
 
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
@@ -10,7 +10,7 @@ export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
   initialState?: boolean
 }
 
-const TextSwitchDefault: FC<TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
+const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
   let [checked, setChecked] = React.useState(initialState);
   let sw = classnames({
     switch: true
