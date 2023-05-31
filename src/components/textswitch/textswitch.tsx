@@ -41,7 +41,11 @@ const TextSwitchDefault: FC<TextSwitchProps> = ({ label1, label2, key1, key2, in
     ref,
     () => ({
       value: () => myRef.current?.checked ? label2 : label1,
-      onChange: (lambda) => myRef.current.onchange = lambda,
+      onChange: (lambda: any) => {
+        if (myRef.current) {
+        return myRef.current.onchange = lambda;
+        }
+      },
       key: () => myRef.current?.checked ? key2 : key1
     }),
     [myRef]
