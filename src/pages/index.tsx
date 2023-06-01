@@ -1,12 +1,19 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import { TextSwitch } from '@/components/textswitch/textswitch'
+import Head from "next/head";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import { TextSwitch } from "@/components/textswitch/textswitch";
+import { Option } from "@/components/textswitch/option/option";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+const onSubmit: SubmitHandler<FieldValues> = data => {
+  console.log("Seleted option value", data);
+};
 
 export default function Home() {
+  const { register, handleSubmit, setValue } = useForm();
+
   return (
     <>
       <Head>
@@ -16,8 +23,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <TextSwitch label1='Left' label2='Right'/>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextSwitch register={register} setValue={setValue}>
+            <Option value="left">Left</Option>
+            <Option value="very-long-element">Very Long Element</Option>
+            <Option value="center">Center</Option>
+            <Option value="right">Right</Option>
+          </TextSwitch>
+          <button>Submit</button>
+        </form>
       </main>
     </>
-  )
+  );
 }

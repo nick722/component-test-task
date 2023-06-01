@@ -1,0 +1,30 @@
+.switch {
+  position: relative;
+  display: flex;
+  color: var(--system-color);
+  background-color: rgb(1 65 255 / 30%);
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.switch .input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 14px;
+  cursor: pointer;
+  transition: 0.4s;
+  background-color: #fff;
+  color: var(--primary-color);
+  width: 0;
+  top: 4px;
+  left: 5px;
+  height: 42px;
+  transition: 0.4s;
+  text-align: center;
+}
+
