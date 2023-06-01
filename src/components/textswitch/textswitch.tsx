@@ -1,6 +1,8 @@
 import React, {ForwardRefRenderFunction, HTMLAttributes} from 'react'
 import classnames from 'classnames'
-import './textswitch.module.css'
+import styles from './textswitch.module.css'
+// import './textswitch.module.css'
+// import styles from '@/styles/Home.module.css'
 
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
   label1: string
@@ -15,17 +17,17 @@ export interface SwitchHandle {
 
 const TextSwitchDefault: ForwardRefRenderFunction<SwitchHandle, TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
   let [checked, setChecked] = React.useState(initialState);
-  let sw = classnames({
-    switch: true
-  })
+  let sw = classnames(
+    styles.switch
+  )
   let inp = classnames({
-    input: true,
-    'input:checked': true,
-    'input:focus': true
+    [styles.input]:true,
+    'styles.input:checked': true,
+    'styles.input:focus': true
   })
   let slider = classnames({
-    slider: true,
-    round: true
+    [styles.slider]: true,
+    [styles.round]: true
   })
 
   let myRef = React.useRef<HTMLInputElement | null>(null)
@@ -57,7 +59,7 @@ const TextSwitchDefault: ForwardRefRenderFunction<SwitchHandle, TextSwitchProps>
   return (
     <label className={sw}>
       <input className={inp} checked={checked} type='checkbox' ref={myRef} />
-      <span className={slider} placeholder={label2 || 'Buy'} data-value={label1 || 'Sell'}>
+      <span className={styles.slider} placeholder={label2 || 'Buy'} data-value={label1 || 'Sell'}>
         <div>{label1 || 'Sell'}</div>
         <div>{label2 || 'Buy'}</div>
       </span>

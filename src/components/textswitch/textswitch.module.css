@@ -19,6 +19,7 @@
   justify-content: space-around;
   padding-top: 14px;
   color: var(--system-color);
+  /*color: yellow;*/
   cursor: pointer;
   background-color: var(--system-color-grey);
   transition: 0.4s;
@@ -35,6 +36,7 @@
   text-align: center;
   content: attr(data-value);
   background-color: #fff;
+  /*background-color: red;*/
   transition: 0.4s;
 }
 
