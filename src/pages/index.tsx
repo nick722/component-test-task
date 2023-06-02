@@ -21,6 +21,7 @@ export default function Home() {
         <TextSwitch label1='Left' label2='Right'/>
         <TextSwitchUp selectedOption={0}>
           <Option value="left">Left</Option>
+          {/*<Option value="center">Very Long Element</Option>*/}
           <Option value="center">Center</Option>
           <Option value="right">Right</Option>
         </TextSwitchUp>
