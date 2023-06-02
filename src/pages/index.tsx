@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { TextSwitch } from '@/components/textswitch/textswitch'
+import {TextSwitchUp} from "@/components/textswitchup/textswitchup";
+import {Option} from "@/components/textswitchup/option/option";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +19,11 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <TextSwitch label1='Left' label2='Right'/>
+        <TextSwitchUp>
+          <Option value="left">Left</Option>
+          <Option value="center">Center</Option>
+          <Option value="right">Right</Option>
+        </TextSwitchUp>
       </main>
     </>
   )

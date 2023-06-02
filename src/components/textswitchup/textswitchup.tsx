@@ -3,17 +3,10 @@ import styles from './textswitchup.module.css'
 
 import classnames from 'classnames'
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
-  label1: string
-  label2: string,
-  key1?: string,
-  key2?: string,
-  initialState?: boolean
+   initialState?: boolean
 }
-// export interface SwitchHandle {
-//   value: () => string ;
-// };
 
-const TextSwitchDefault: ForwardRefRenderFunction<SwitchHandle, TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
+const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchProps> = ({ children, label1, label2, key1, key2, initialState = false }, ref) => {
   let [checked, setChecked] = React.useState(initialState);
   let switchClass = classnames(
     styles.switch
@@ -40,27 +33,10 @@ const TextSwitchDefault: ForwardRefRenderFunction<SwitchHandle, TextSwitchProps>
 
   }, [myRef])
 
-  // React.useImperativeHandle(
-  //   ref,
-  //   () => ({
-  //     // value: () => myRef.current?.checked ? label2 : label1,
-  //     // onChange: (lambda: any) => {
-  //     //   if (myRef.current) {
-  //     //   return myRef.current.onchange = lambda;
-  //     //   }
-  //     // },
-  //     // key: () => myRef.current?.checked ? key2 : key1
-  //   }),
-  //   [myRef]
-  // )
-
   return (
     <label className={switchClass}>
-      <input className={inputClass} checked={checked} type='checkbox' ref={myRef} />
-      <span className={styles.slider} placeholder={label2 || 'Buy'} data-value={label1 || 'Sell'}>
-        <div>{label1 || 'Sell'}</div>
-        <div>{label2 || 'Buy'}</div>
-      </span>
+      <span className={styles.slider}/>
+      {children}
     </label>
   )
 }

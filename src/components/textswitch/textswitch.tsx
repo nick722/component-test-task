@@ -1,8 +1,6 @@
 import React, {ForwardRefRenderFunction, HTMLAttributes} from 'react'
 import classnames from 'classnames'
 import styles from './textswitch.module.css'
-// import './textswitch.module.css'
-// import styles from '@/styles/Home.module.css'
 
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
   label1: string
