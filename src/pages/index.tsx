@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <TextSwitch label1='Left' label2='Right'/>
-        <TextSwitchUp>
+        <TextSwitchUp selectedOption={0}>
           <Option value="left">Left</Option>
           <Option value="right">Right</Option>
         </TextSwitchUp>

@@ -1,5 +1,6 @@
-import React, {FC} from 'react';
+import React, {useContext, FC} from 'react';
 import styles from "./option.module.css"
+import {Context} from "@/components/textswitchup/textswitchup";
 
 interface OptionProps {
   children: React.ReactNode
@@ -7,10 +8,11 @@ interface OptionProps {
   // items: string[]
 }
 
-
 export const Option  = ({ value, children}: OptionProps) => {
+const onMouseDown = useContext(Context)
+
   return (
-      <div className={styles.option}>
+      <div value={value} onMouseDown={() => onMouseDown(value)} className={styles.option}>
         {children}
       </div>
   );
