@@ -37,9 +37,12 @@ const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchPr
     width: `${100 / numberOfOptions}%`,
   }
 
-  const onOptionSelected = <T,>(value: T) => {
-    setSelectedElement( children.findIndex(child => child.props.value === value))
-    return value
+  const onOptionSelected = <T,>(option: T) => {
+    console.log("option", option);
+    console.log(option.getAttribute("value"));
+    console.log(option.offsetWidth)
+    setSelectedElement( children.findIndex(child => child.props.value === option.getAttribute("value")))
+    return option
   }
 
   return (

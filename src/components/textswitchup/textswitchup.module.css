@@ -1,7 +1,7 @@
 .switch {
   position: relative;
   display: flex;
-  width: 300px;
+  /*width: 300px;*/
   /*height: 50px;*/
   /*padding-top: 14px;*/
   color: var(--system-color);
@@ -25,9 +25,9 @@
   transition: 0.4s;
   background-color: #fff;
   color: var(--primary-color);
-  width: 129px;
+  /*width: 129px;*/
   top: 4px;
-  left: 5px;
+  /*left: 5px;*/
   height: 42px;
   transition: 0.4s;
   text-align: center;
