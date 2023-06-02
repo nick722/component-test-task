@@ -3,35 +3,24 @@ import styles from './textswitchup.module.css'
 
 import classnames from 'classnames'
 export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
-   initialState?: boolean
+   initialState?: number
 }
 
 const TextSwitchDefault: ForwardRefRenderFunction<HTMLInputElement, TextSwitchProps> = ({ children, label1, label2, key1, key2, initialState = false }, ref) => {
-  let [checked, setChecked] = React.useState(initialState);
-  let switchClass = classnames(
+  const  [selectedElement, setSelectedElement] = React.useState(initialState);
+  const  switchClass = classnames(
     styles.switch
   )
-  let inputClass = classnames({
+  const inputClass = classnames({
     [styles.input]:true,
     'styles.input:checked': true,
     'styles.input:focus': true
   })
-  let slider = classnames({
+  const slider = classnames({
     [styles.slider]: true,
     [styles.round]: true
   })
 
-  let myRef = React.useRef<HTMLInputElement | null>(null)
-
-  React.useEffect(() => {
-    if (myRef.current) {
-      myRef.current.onclick = (e) => {
-        const target = e.target as HTMLInputElement
-        setChecked(target.checked)
-      }
-    }
-
-  }, [myRef])
 
   return (
     <label className={switchClass}>
