@@ -21,7 +21,6 @@ export default function Home() {
         <TextSwitch label1='Left' label2='Right'/>
         <TextSwitchUp>
           <Option value="left">Left</Option>
-          <Option value="center">Center</Option>
           <Option value="right">Right</Option>
         </TextSwitchUp>
       </main>
