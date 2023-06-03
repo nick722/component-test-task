@@ -8,9 +8,9 @@ interface OptionProps {
   // items: string[]
 }
 
-export const Option = ({ value, children }: OptionProps) => {
+export const Option = ({ id, value, children }: OptionProps) => {
   const onMouseDown = useContext(Context);
-  const ref = useRef(null);
+  const ref = useRef("ditch");
 
   // useEffect(()=> {
   //   console.log("ref.current.offsetWidth", ref.current.offsetWidth);
@@ -18,6 +18,8 @@ export const Option = ({ value, children }: OptionProps) => {
 
   return (
     <div
+      // id={`option`}
+      id={id}
       ref={ref}
       value={value}
       onMouseDown={() => onMouseDown(ref.current)}

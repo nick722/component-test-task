@@ -35,8 +35,8 @@ export const TextSwitchUp: FC<HTMLInputElement, TextSwitchProps> = ({
   key2,
   initialState = false
 }) => {
-  console.log("children[0]", children[0]);
-  const ref = useRef(null);
+  console.log("children", children);
+  // const ref = useRef(null);
   // console.log("ref.current.children[0]", ref.current.children);
   // const firstElement = {
   //   // value: children[0].getAttribute("value"),
@@ -88,10 +88,18 @@ export const TextSwitchUp: FC<HTMLInputElement, TextSwitchProps> = ({
     return option;
   };
 
+  const childrenWithProps = React.Children.map(children, (child, i) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { id: `option${i + 1}` });
+    }
+  });
+
   return (
-    <label ref={ref} className={switchClass}>
+    <label className={switchClass}>
       <span style={sliderAnimationStyles} className={styles.slider} />
-      <Context.Provider value={onOptionSelected}>{children}</Context.Provider>
+      <Context.Provider value={onOptionSelected}>
+        {childrenWithProps}
+      </Context.Provider>
     </label>
   );
 };
