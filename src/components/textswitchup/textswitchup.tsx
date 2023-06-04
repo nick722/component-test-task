@@ -36,6 +36,10 @@ export const TextSwitchUp: FC<HTMLInputElement, TextSwitchProps> = ({
   initialState = false
 }) => {
   console.log("children", children);
+  const ref = React.useRef();
+
+  console.log("ref.current", ref.current);
+  // console.log("ref.current.children[0]", ref.current.children[0]);
   // const ref = useRef(null);
   // console.log("ref.current.children[0]", ref.current.children);
   // const firstElement = {
@@ -95,7 +99,7 @@ export const TextSwitchUp: FC<HTMLInputElement, TextSwitchProps> = ({
   });
 
   return (
-    <label className={switchClass}>
+    <label ref={ref} className={switchClass}>
       <span style={sliderAnimationStyles} className={styles.slider} />
       <Context.Provider value={onOptionSelected}>
         {childrenWithProps}
