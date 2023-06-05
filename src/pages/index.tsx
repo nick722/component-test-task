@@ -1,14 +1,13 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import { TextSwitch } from "@/components/textswitch/textswitch";
 import { Option } from "@/components/textswitch/option/option";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import classnames from "classnames";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const main = classnames({ [styles.main]: true });
 const onSubmit: SubmitHandler<FieldValues> = data => {
-  console.log("Seleted option value", data);
+  console.log(data);
 };
 
 export default function Home() {
@@ -22,7 +21,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={main}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextSwitch register={register} setValue={setValue}>
             <Option value="left">Left</Option>

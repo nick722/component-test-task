@@ -6,12 +6,20 @@ import React, {
   createContext,
   useRef
 } from "react";
+import classnames from "classnames";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import styles from "./textswitch.module.css";
-import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
 
 const inlineMargin = 5;
 const switchName = "switch";
+const textSwitch = classnames({
+  [styles.switch]: true
+});
+let slider = classnames({
+  [styles.slider]: true,
+  [styles.round]: true
+});
 
 export const Context = createContext((value: HTMLElement) => {});
 
@@ -51,7 +59,7 @@ export const TextSwitch: FC<TextSwitchProps> = ({
     setSliderContainerX(parentNode?.getBoundingClientRect().x);
     setSelectedOption(defaultOption);
     setValue(switchName, defaultOption.value);
-  }, []);
+  }, [setValue]);
 
   const getSliderStyles = () => {
     if (selectedOption && sliderContainerX) {
@@ -69,9 +77,9 @@ export const TextSwitch: FC<TextSwitchProps> = ({
   };
 
   return (
-    <div ref={parentRef} className={styles.switch}>
+    <div ref={parentRef} className={textSwitch}>
       <input {...register(switchName)} type="hidden" />
-      <span style={getSliderStyles()} className={styles.slider} />
+      <span style={getSliderStyles()} className={slider} />
       <Context.Provider value={getOptionRef}>
         <>{children}</>
       </Context.Provider>

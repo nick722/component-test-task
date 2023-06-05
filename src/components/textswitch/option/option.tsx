@@ -1,6 +1,12 @@
-import React, { useRef, useContext, FC, useEffect } from "react";
-import styles from "./option.module.css";
+import React, { useRef, useContext, FC } from "react";
+import classnames from "classnames";
 import { Context } from "@/components/textswitch/textswitch";
+
+import styles from "./option.module.css";
+
+const option = classnames({
+  [styles.option]: true
+});
 
 interface OptionProps {
   children: React.ReactNode;
@@ -16,7 +22,7 @@ export const Option: FC<OptionProps> = ({ value, children }) => {
       ref={ref}
       data-value={value}
       onMouseDown={() => getOptionRef(ref.current as HTMLDivElement)}
-      className={styles.option}
+      className={option}
     >
       {children}
     </div>
