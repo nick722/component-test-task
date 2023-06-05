@@ -1,68 +1,80 @@
-import React, {ForwardRefRenderFunction, HTMLAttributes} from 'react'
-import classnames from 'classnames'
-import styles from './textswitch.module.css'
+import React, {
+  FC,
+  ReactNode,
+  useState,
+  useEffect,
+  createContext,
+  useRef
+} from "react";
 
-export interface TextSwitchProps extends HTMLAttributes<HTMLButtonElement> {
-  label1: string
-  label2: string,
-  key1?: string,
-  key2?: string,
-  initialState?: boolean
+import styles from "./textswitch.module.css";
+import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
+
+const inlineMargin = 5;
+const switchName = "switch";
+
+export const Context = createContext((value: HTMLElement) => {});
+
+interface Option {
+  value: string;
+  width: number;
+  x: number;
 }
-export interface SwitchHandle {
-  value: () => string ;
-};
 
-const TextSwitchDefault: ForwardRefRenderFunction<SwitchHandle, TextSwitchProps> = ({ label1, label2, key1, key2, initialState = false }, ref) => {
-  let [checked, setChecked] = React.useState(initialState);
-  let sw = classnames(
-    styles.switch
-  )
-  let inp = classnames({
-    [styles.input]:true,
-    'styles.input:checked': true,
-    'styles.input:focus': true
-  })
-  let slider = classnames({
-    [styles.slider]: true,
-    [styles.round]: true
-  })
+interface TextSwitchProps {
+  children: ReactNode | ReactNode[];
+  register: UseFormRegister<FieldValues>;
+  setValue: (name: string, value: unknown, config?: Object) => void;
+}
 
-  let myRef = React.useRef<HTMLInputElement | null>(null)
+const getOptionValues = (node: HTMLElement): Option => ({
+  value: node.getAttribute("data-value")!,
+  width: node.getBoundingClientRect().width,
+  x: node.getBoundingClientRect().x
+});
 
-  React.useEffect(() => {
-    if (myRef.current) {
-      myRef.current.onclick = (e) => {
-        const target = e.target as HTMLInputElement
-        setChecked(target.checked)
-      }
+export const TextSwitch: FC<TextSwitchProps> = ({
+  setValue,
+  register,
+  children
+}) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [sliderContainerX, setSliderContainerX] = useState<number | null>(null);
+
+  useEffect(() => {
+    const parentNode = parentRef.current as HTMLElement;
+    const defaultOption = getOptionValues(
+      parentNode?.children[2] as HTMLElement
+    );
+    setSliderContainerX(parentNode?.getBoundingClientRect().x);
+    setSelectedOption(defaultOption);
+    setValue(switchName, defaultOption.value);
+  }, []);
+
+  const getSliderStyles = () => {
+    if (selectedOption && sliderContainerX) {
+      return {
+        width: selectedOption.width - inlineMargin * 2,
+        left: selectedOption.x + inlineMargin - sliderContainerX
+      };
     }
+  };
 
-  }, [myRef])
-
-  React.useImperativeHandle(
-    ref,
-    () => ({
-      value: () => myRef.current?.checked ? label2 : label1,
-      onChange: (lambda: any) => {
-        if (myRef.current) {
-        return myRef.current.onchange = lambda;
-        }
-      },
-      key: () => myRef.current?.checked ? key2 : key1
-    }),
-    [myRef]
-  )
+  const getOptionRef = (optionElement: HTMLElement) => {
+    const selectedOption = getOptionValues(optionElement);
+    setSelectedOption(selectedOption);
+    setValue(switchName, selectedOption.value);
+  };
 
   return (
-    <label className={sw}>
-      <input className={inp} checked={checked} type='checkbox' ref={myRef} />
-      <span className={styles.slider} placeholder={label2 || 'Buy'} data-value={label1 || 'Sell'}>
-        <div>{label1 || 'Sell'}</div>
-        <div>{label2 || 'Buy'}</div>
-      </span>
-    </label>
-  )
-}
-
-export const TextSwitch = React.forwardRef(TextSwitchDefault)
+    <div ref={parentRef} className={styles.switch}>
+      <input {...register(switchName)} type="hidden" />
+      <span style={getSliderStyles()} className={styles.slider} />
+      <Context.Provider value={getOptionRef}>
+        <>{children}</>
+      </Context.Provider>
+    </div>
+  );
+};

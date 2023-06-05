@@ -1,0 +1,8 @@
+.option {
+  z-index: 1;
+  height: 50px;
+  padding-inline: 30px;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 14px;
+}
